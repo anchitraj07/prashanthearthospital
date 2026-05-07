@@ -144,7 +144,7 @@ export default function HeroSection() {
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0 border-2 border-accent/40">
                   <AppImage
-                    src="https://i.ibb.co/Kx9bpXr7/dr1.jpg"
+                    src="/assets/images/Doctors/Prashant Kashyap.jpeg"
                     alt="Dr. Prashant Kashyap cardiologist in white coat, professional medical portrait"
                     fill
                     className="object-cover"

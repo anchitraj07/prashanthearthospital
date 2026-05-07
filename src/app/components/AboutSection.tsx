@@ -11,7 +11,7 @@ const staff = [
   exp: '10+ Years',
   patients: '3,000+',
   rating: '4.7★',
-  photo: 'https://i.ibb.co/Kx9bpXr7/dr1.jpg',
+  photo: '/assets/images/Doctors/Prashant Kashyap.jpeg',
   alt: 'Dr. Prashant Kashyap senior cardiologist founder of Prashant Heart Hospital in professional white coat',
   featured: true
 },
@@ -23,7 +23,7 @@ const staff = [
   exp: '5+ Years',
   patients: '2,000+',
   rating: '4.9★',
-  photo: "https://img.rocket.new/generatedImages/rocket_gen_img_1411181b3-1772154572406.png",
+  photo: "/assets/images/Doctors/Seep Sethi.jpeg",
   alt: 'Dr. Seep Sethi gynecologist in medical professional attire',
   featured: false
 },
@@ -35,7 +35,7 @@ const staff = [
   exp: '12+ Years',
   patients: '7,000+',
   rating: '4.8★',
-  photo: "https://img.rocket.new/generatedImages/rocket_gen_img_18c498552-1775081961745.png",
+  photo: "/assets/images/Doctors/Dinesh Singh.jpeg",
   alt: 'Dr. Dinesh Singh senior physician in professional medical setting',
   featured: false
 }];
@@ -71,7 +71,7 @@ export default function AboutSection() {
           <div className="lg:col-span-5 reveal-left">
             <div className="relative rounded-3xl overflow-hidden shadow-navy aspect-[4/3]">
               <AppImage
-                src="https://drprashantkashyap.com/static/media/cathlab.53ea011a82b97ad525e0.jpeg"
+                src="/assets/images/Cath Lab.png"
                 alt="Prashant Heart Hospital Philips Advanced Cath Lab room with state-of-the-art cardiac intervention equipment"
                 fill
                 className="object-cover"

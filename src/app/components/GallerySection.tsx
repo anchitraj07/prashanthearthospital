@@ -26,7 +26,7 @@ const galleryItems = [
 },
 {
   id: 'cathlab',
-  src: 'https://drprashantkashyap.com/static/media/cathlab.53ea011a82b97ad525e0.jpeg',
+  src: '/assets/images/Cath Lab.png',
   alt: 'Philips Advanced Cath Lab interior with cardiac imaging equipment and intervention suite at Prashant Heart Hospital',
   label: 'Philips Cath Lab',
   sublabel: 'Advanced Cardiac Intervention Suite',
@@ -53,7 +53,7 @@ const galleryItems = [
 },
 {
   id: 'consultation',
-  src: 'https://drprashantkashyap.com/static/media/dr1.356911a88123efcc9ccb.jpeg',
+  src: '/assets/images/Doctors/Prashant Kashyap.jpeg',
   alt: 'Doctor consultation room at Prashant Heart Hospital with Dr. Prashant Kashyap reviewing patient records in well-equipped office',
   label: 'Consultation Room',
   sublabel: 'Private Doctor Consultation',
