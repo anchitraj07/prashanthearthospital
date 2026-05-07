@@ -17,7 +17,7 @@ import AppImage from '@/components/ui/AppImage';
 const galleryItems = [
 {
   id: 'exterior',
-  src: 'https://i.postimg.cc/HnCctxcp/hospital.jpg',
+  src: '/assets/images/Hopsital.png',
   alt: 'Prashant Heart Hospital exterior building front view in Begusarai Bihar, modern medical facility with signage',
   label: 'Hospital Exterior',
   sublabel: 'Prashant Heart Hospital, Begusarai',

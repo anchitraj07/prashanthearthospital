@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Prashant Heart Hospital — Expert Cardiac Care',
     description: 'World-class cardiology in Begusarai, Bihar. Philips Cath Lab, Gold Medalist cardiologist, 50,000+ patients treated.',
-    images: [{ url: '/assets/images/app_logo.png', width: 1200, height: 630 }],
+    images: [{ url: '/assets/images/Logo.png', width: 1200, height: 630 }],
   },
 };
 

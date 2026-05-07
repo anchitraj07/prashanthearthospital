@@ -32,7 +32,7 @@ export default function HeroSection() {
       {/* Cinematic background */}
       <div ref={bgRef} className="absolute inset-0 w-full h-full will-change-transform">
         <AppImage
-          src="https://i.postimg.cc/HnCctxcp/hospital.jpg"
+          src="/assets/images/Hopsital.png"
           alt="Prashant Heart Hospital building exterior, modern medical facility in Begusarai Bihar with clean architecture and welcoming entrance"
           fill
           priority

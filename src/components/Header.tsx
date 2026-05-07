@@ -36,21 +36,29 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'nav-glass py-3' : 'bg-transparent py-5'
+        scrolled ? 'bg-slate-950/85 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,0.35)] py-3' : 'bg-slate-950/20 backdrop-blur-xl py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group" aria-label="Prashant Heart Hospital Home">
-          {/* Heart logo mark */}
-          <div className="w-9 h-9 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center group-hover:bg-accent/30 transition-colors">
-            <svg className="w-5 h-5 text-accent animate-heartbeat" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" />
-            </svg>
+        <Link
+          href="/"
+          className="flex items-center gap-3 group bg-slate-950/35 backdrop-blur-xl border border-white/10 rounded-full px-3 py-2 hover:bg-slate-950/50 transition-all duration-300"
+          aria-label="Prashant Heart Hospital Home"
+        >
+          <div className="flex items-center justify-center rounded-full bg-white/40 backdrop-blur-sm p-2 shadow-lg shadow-slate-950/30 border border-white/50">
+            <img
+              src="/assets/images/Logo.png"
+              alt="Prashant Heart Hospital Logo"
+              className="w-12 h-12 object-contain"
+              loading="eager"
+            />
           </div>
           <div>
-            <div className="text-white font-semibold text-base leading-tight">Prashant Heart Hospital</div>
-            <div className="text-accent/80 text-xs leading-none">Expert Cardiac Care</div>
+            <div className="text-white font-semibold text-base leading-tight drop-shadow-lg">Prashant Heart Hospital</div>
+            <div className="text-teal-200 text-xs leading-none uppercase tracking-[0.2em] drop-shadow-sm">
+              Expert Cardiac Care
+            </div>
           </div>
         </Link>
 
@@ -111,9 +119,12 @@ export default function Header() {
           <div className="flex items-center justify-between mb-10">
             <Link href="/" onClick={closeMenu} className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center">
-                <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" />
-                </svg>
+                <img
+                  src="/assets/images/Logo.png"
+                  alt="Prashant Heart Hospital Logo"
+                  className="w-6 h-6 object-contain"
+                  loading="eager"
+                />
               </div>
               <span className="text-white font-semibold">Prashant Heart Hospital</span>
             </Link>
