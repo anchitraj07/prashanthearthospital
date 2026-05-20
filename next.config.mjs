@@ -2,9 +2,10 @@ import { imageHosts } from './image-hosts.config.mjs';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  basePath: '/prashanthearthospital',
   trailingSlash: true,
   productionBrowserSourceMaps: true,
-  distDir: process.env.DIST_DIR || '.next',
   typescript: {
     ignoreBuildErrors: true,
   },
