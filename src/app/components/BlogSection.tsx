@@ -52,61 +52,66 @@ const posts = [
 
 export default function BlogSection() {
   return (
-    <section id="blog" className="relative overflow-hidden bg-background py-10 md:py-12 lg:py-14">
-      <div className="pointer-events-none absolute bottom-0 right-0 h-72 w-72 blob-teal opacity-15" />
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mb-8 max-w-2xl">
-          <div className="reveal mb-3 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3 py-1">
-            <span className="section-label text-accent">Health Tips</span>
-          </div>
-          <h2 className="reveal delay-100 font-serif text-3xl leading-tight text-primary sm:text-4xl lg:text-5xl">
-            Cardiac Health <span className="teal-gradient-text italic">Insights</span>
-          </h2>
+    <div className="h-full flex flex-col">
+      <div className="mb-8">
+        <div className="reveal mb-3 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3 py-1">
+          <span className="section-label text-accent">Health Tips</span>
         </div>
+        <h2 className="reveal delay-100 font-serif text-3xl leading-tight text-primary">
+          Cardiac Health <span className="teal-gradient-text italic">Insights</span>
+        </h2>
+      </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {posts.map((post, i) => (
-            <article key={post.title} className={`reveal delay-${(i + 1) * 100}`}>
-              <a
-                href={post.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Read article: ${post.title}`}
-                className={`card-hover group flex h-full min-h-[176px] flex-col rounded-lg border p-4 shadow-card transition-colors hover:border-accent/40 hover:bg-white ${post.color}`}
-              >
-                <div className="mb-3 flex items-start justify-between gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
+        {posts.map((post, i) => (
+          <article key={post.title} className={`reveal delay-${(i + 1) * 100} h-full`}>
+            <a
+              href={post.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Read article: ${post.title}`}
+              className={`group flex h-full flex-col rounded-3xl border p-5 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:border-accent/40 bg-white relative overflow-hidden`}
+            >
+              {/* Hover Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="relative z-10">
+                <div className="mb-4 flex items-start justify-between gap-3">
                   <span
-                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${post.iconColor}`}
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${post.iconColor} shadow-sm transition-transform duration-500 group-hover:scale-110`}
                   >
-                    <Icon name={post.icon} size={19} />
+                    <Icon name={post.icon} size={20} />
                   </span>
                   <span
-                    className={`rounded-full px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wide ${post.badgeColor}`}
+                    className={`rounded-full px-2.5 py-1 text-[0.6rem] font-bold uppercase tracking-wider ${post.badgeColor}`}
                   >
                     {post.category}
                   </span>
                 </div>
 
-                <h3 className="mb-2 text-[0.98rem] font-bold leading-snug text-primary transition-colors group-hover:text-accent">
+                <h3 className="mb-2 text-base font-bold leading-snug text-primary transition-colors group-hover:text-accent line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="mb-4 text-[0.82rem] leading-relaxed text-muted-foreground">
+                <p className="mb-4 text-xs leading-relaxed text-muted-foreground line-clamp-3">
                   {post.excerpt}
                 </p>
 
-                <div className="mt-auto flex items-center justify-between border-t border-border/50 pt-3">
-                  <span className="text-xs font-semibold text-accent">{post.readTime}</span>
-                  <Icon
-                    name="ArrowUpRightIcon"
-                    size={17}
-                    className="text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
+                <div className="mt-auto flex items-center justify-between pt-4 border-t border-border/50">
+                  <span className="text-[10px] font-bold text-accent/70 uppercase tracking-widest">{post.readTime}</span>
+                  <div className="flex items-center gap-1 text-accent font-semibold text-xs group/link">
+                    <span>Read More</span>
+                    <Icon
+                      name="ArrowUpRightIcon"
+                      size={14}
+                      className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
+                  </div>
                 </div>
-              </a>
-            </article>
-          ))}
-        </div>
+              </div>
+            </a>
+          </article>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }

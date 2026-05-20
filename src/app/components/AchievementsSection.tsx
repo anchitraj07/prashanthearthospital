@@ -89,54 +89,55 @@ export default function AchievementsSection() {
   return (
     <section
       id="achievements"
-      className="section-pad bg-primary relative overflow-hidden"
+      className="py-12 bg-primary relative overflow-hidden"
       ref={sectionRef}
     >
-      {/* Decorative */}
+      {/* Decorative background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[80px]" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[80px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-14">
-          <div className="reveal inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 border border-accent/25 mb-4">
-            <span className="section-label text-accent">Recognition</span>
-          </div>
-          <h2 className="reveal delay-100 text-section-xl font-serif text-white">
-            Achievements & <span className="teal-gradient-text italic">Awards</span>
-          </h2>
-          <p className="reveal delay-200 text-white/60 text-base mt-4 max-w-lg mx-auto leading-relaxed">
-            Over a decade of clinical excellence, academic distinction, and patient-centred care —
-            recognised across Bihar and beyond.
-          </p>
-        </div>
-
-        {/* Stats grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-5 mb-14">
-          {stats.map((stat, i) => (
-            <div key={stat.label} className={`reveal delay-${Math.min((i + 1) * 100, 500)}`}>
-              <StatCard stat={stat} animate={animate} />
-            </div>
-          ))}
-        </div>
-
-        {/* Awards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {awards.map((award, i) => (
-            <div
-              key={award.title}
-              className={`reveal delay-${(i + 1) * 100} card-hover bg-white/5 border border-white/10 rounded-2xl p-6 group`}
-            >
-              <div className="text-4xl mb-4">{award.icon}</div>
-              <div className="text-accent text-xs font-semibold mb-1 section-label">
-                {award.year}
+        <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 md:p-10 backdrop-blur-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Left: Stats Strip */}
+            <div className="lg:col-span-7">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 md:gap-8">
+                {stats.map((stat, i) => {
+                  const count = useCountUp(stat.value, stat.isFloat ?? false, 2000, animate);
+                  return (
+                    <div key={stat.label} className={`reveal delay-${Math.min((i + 1) * 100, 500)}`}>
+                      <div className="text-2xl md:text-3xl font-bold font-serif text-accent mb-1">
+                        {count}{stat.suffix}
+                      </div>
+                      <div className="text-white/60 text-[10px] md:text-xs uppercase tracking-wider font-medium">
+                        {stat.label}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-              <h3 className="text-white font-semibold text-base mb-2">{award.title}</h3>
-              <p className="text-white/50 text-xs">{award.org}</p>
             </div>
-          ))}
+
+            {/* Right: Awards Strip */}
+            <div className="lg:col-span-5 lg:border-l lg:border-white/10 lg:pl-10">
+              <h3 className="text-white/40 text-[10px] uppercase tracking-[0.2em] font-bold mb-6">
+                Clinical Excellence & Awards
+              </h3>
+              <div className="grid grid-cols-2 gap-4">
+                {awards.map((award, i) => (
+                  <div key={award.title} className={`reveal delay-${(i + 1) * 100} flex items-center gap-3`}>
+                    <span className="text-2xl">{award.icon}</span>
+                    <div>
+                      <div className="text-white font-semibold text-[11px] leading-tight mb-0.5">{award.title}</div>
+                      <div className="text-white/40 text-[9px] uppercase">{award.year}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
