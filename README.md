@@ -4,7 +4,7 @@ A professional website for Prashant Heart Hospital showcasing world-class cardio
 
 ## 🌐 Live Website
 
-Visit the live website: [https://anchitraj07.github.io/Prashant-Heart-Hospital/](https://anchitraj07.github.io/Prashant-Heart-Hospital/)
+Visit the live website: [https://prashant-heart-hospital.netlify.app/](https://prashant-heart-hospital.netlify.app/)
 
 ## 🚀 Features
 
@@ -76,7 +76,7 @@ Prashant Heart Hospital is a premier cardiology center in Begusarai, Bihar, dedi
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/anchitraj07/Prashant-Heart-Hospital.git
+git clone https://github.com/anchitraj07/prashanthearthospital.git
 cd Prashant-Heart-Hospital
 ```
 
@@ -123,19 +123,21 @@ Prashant-Heart-Hospital/
 │   │   └── page.tsx       # Home page
 │   ├── components/        # Reusable UI components
 │   └── lib/               # Utility functions and configurations
-├── .github/
-│   └── workflows/         # GitHub Actions for deployment
 ├── next.config.mjs        # Next.js configuration
 ├── tailwind.config.js     # Tailwind CSS configuration
 └── package.json           # Project dependencies
 ```
 
-## 🚀 Deployment
+## 🚀 Deployment (Netlify)
 
-The website is automatically deployed to GitHub Pages using GitHub Actions. Any push to the main branch triggers a new deployment.
+This project is configured for deployment on Netlify using `netlify.toml`.
 
-### Deployment Status
-[![Deploy to GitHub Pages](https://github.com/anchitraj07/Prashant-Heart-Hospital/actions/workflows/deploy.yml/badge.svg)](https://github.com/anchitraj07/Prashant-Heart-Hospital/actions/workflows/deploy.yml)
+### Build Settings
+- Build command: `npm run build`
+- Publish directory: `.next` (see `netlify.toml`)
+
+### Live Site
+- https://prashant-heart-hospital.netlify.app/
 
 ## 📄 License
 
