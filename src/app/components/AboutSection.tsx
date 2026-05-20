@@ -1,6 +1,9 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import AppImage from '@/components/ui/AppImage';
 import Icon from '@/components/ui/AppIcon';
+import DoctorModal from '@/components/DoctorModal';
 
 const staff = [
   {
@@ -15,10 +18,32 @@ const staff = [
     alt: 'Dr. Prashant Kashyap senior cardiologist founder of Prashant Heart Hospital in professional white coat',
     featured: true,
     imageClassName: 'object-contain object-[center_42%] scale-110',
+    details: {
+      education: [
+        'MBBS – PMCH, Patna',
+        'MD (Internal Medicine) – RIMS, Ranchi',
+        'DM (Cardiology) – Gold Medalist',
+      ],
+      experience: [
+        'Founder & Senior Cardiologist – Prashant Heart Hospital',
+        '10+ Years of Interventional Cardiology Experience',
+        'Specialist in Angioplasty, Pacemaker & CRT Implantation',
+      ],
+      services: [
+        'Interventional Cardiology',
+        'Angioplasty & Stenting',
+        'Pacemaker Implantation',
+        'Heart Failure Management (CRT)',
+        '2D Echo & Stress Echo',
+        'TMT & Holter Monitoring',
+      ],
+      address: 'IMA Path, Near TV Tower, Begusarai – 851 101',
+      phones: ['80029 82980', '80843 88876'],
+    },
   },
   {
     name: 'Dr. Seep Sethi',
-    role: 'Gynecologist',
+    role: 'Gynecologist & Fertility Specialist',
     quals: 'MBBS (MAMC), MS OBGYN (Mumbai), FMAS, DMAS',
     badge: '',
     exp: '5+ Years',
@@ -28,6 +53,32 @@ const staff = [
     alt: 'Dr. Seep Sethi gynecologist in medical professional attire',
     featured: false,
     imageClassName: 'object-cover object-top',
+    details: {
+      education: [
+        'MBBS – MAMC, Delhi',
+        'MS (Obstetrics & Gynecology) – Mumbai',
+        'Fellowship in IVF & Reproductive Medicine',
+      ],
+      experience: [
+        'Max Hospital, Delhi',
+        'Former Senior Resident – Safdarjung Hospital, Delhi',
+        'Former Associate Consultant – Zeeva Fertility Hospital, Delhi',
+      ],
+      services: [
+        'Infertility Evaluation & Treatment',
+        'Ovulation Induction, IUI',
+        'PCOS & Hormonal Disorder Management',
+        'Recurrent Miscarriage Care',
+        'Menstrual Disorder Treatment',
+        'Complete Maternity Care',
+        'High-Risk Pregnancy Care',
+        'Pregnancy Planning',
+        'Gynecological Consultation',
+        'Ultrasound for Pregnancy & Fertility Treatment',
+      ],
+      address: 'C/O Dr. Dinesh Singh, Jyoti Kunj, Near TV Tower, Begusarai',
+      phones: ['80029 82980', '80843 88876'],
+    },
   },
   {
     name: 'Dr. Dinesh Singh',
@@ -41,10 +92,39 @@ const staff = [
     alt: 'Dr. Dinesh Singh senior physician in professional medical setting',
     featured: false,
     imageClassName: 'object-cover object-top',
+    details: {
+      education: ['MBBS', 'MD (Medicine)'],
+      experience: [
+        'Senior Physician with 12+ Years Experience',
+        'Expert in Chronic Disease Management',
+        'Internal Medicine Specialist',
+      ],
+      services: [
+        'General Medicine',
+        'Chronic Disease Management',
+        'Diabetes & Hypertension Care',
+        'Health Screenings',
+        'Preventive Care',
+      ],
+      address: 'Jyoti Kunj, Near TV Tower, Begusarai',
+      phones: ['80029 82980'],
+    },
   },
 ];
 
 export default function AboutSection() {
+  const [selectedDoctor, setSelectedDoctor] = useState<(typeof staff)[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (doctor: (typeof staff)[0]) => {
+    setSelectedDoctor(doctor);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <section id="about" className="section-pad bg-background relative overflow-hidden">
       {/* Background blobs */}
@@ -189,7 +269,8 @@ export default function AboutSection() {
             {staff.map((doc, i) => (
               <div
                 key={doc.name}
-                className={`reveal delay-${(i + 1) * 100} card-hover group relative rounded-3xl overflow-hidden border border-border shadow-card bg-card`}
+                onClick={() => openModal(doc)}
+                className={`reveal delay-${(i + 1) * 100} card-hover group relative rounded-3xl overflow-hidden border border-border shadow-card bg-card cursor-pointer`}
               >
                 {/* Photo */}
                 <div className="relative aspect-[4/5] overflow-hidden bg-slate-100">
@@ -203,6 +284,15 @@ export default function AboutSection() {
                   />
 
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
+                  
+                  {/* View Details Overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="bg-white/20 backdrop-blur-md border border-white/30 px-6 py-2 rounded-full text-white font-medium flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <span>View Profile</span>
+                      <Icon name="ArrowRightIcon" size={16} />
+                    </div>
+                  </div>
+
                   {doc.badge && (
                     <div className="absolute top-4 right-4 bg-yellow-400 text-primary text-xs font-bold px-3 py-1 rounded-full">
                       🏅 {doc.badge}
@@ -232,6 +322,13 @@ export default function AboutSection() {
           </div>
         </div>
       </div>
+
+      {/* Doctor Details Modal */}
+      <DoctorModal 
+        doctor={selectedDoctor} 
+        isOpen={isModalOpen} 
+        onClose={closeModal} 
+      />
     </section>
   );
 }
