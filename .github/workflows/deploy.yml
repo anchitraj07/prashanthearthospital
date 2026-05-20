@@ -31,7 +31,9 @@ jobs:
         run: npm ci --force
 
       - name: Build application
-        run: npm run build
+        run: |
+          npm run build
+          ls -R out
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://dummy.supabase.co' }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'dummykey.updateyourkkey.here' }}
