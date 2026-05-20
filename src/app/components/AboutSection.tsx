@@ -194,55 +194,72 @@ export default function AboutSection() {
           </div>
 
           {/* Right: Info */}
-          <div className="lg:col-span-7 flex flex-col justify-between gap-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {[
-                {
-                  icon: 'ShieldCheckIcon',
-                  title: 'ISO Certified Facility',
-                  desc: 'ISO 27001 certified for data security and clinical process standards.',
-                },
-                {
-                  icon: 'AcademicCapIcon',
-                  title: 'Gold Medalist Specialist',
-                  desc: 'Dr. Prashant Kashyap — DM Cardiology Gold Medalist with 10+ years of interventional expertise.',
-                },
-                {
-                  icon: 'HeartIcon',
-                  title: 'Full-Spectrum Cardiology',
-                  desc: 'From ECG and 2D Echo to Angioplasty, Pacemaker implantation and CRT — all under one roof.',
-                },
-                {
-                  icon: 'ClockIcon',
-                  title: '24/7 Emergency ICU',
-                  desc: 'Round-the-clock cardiac emergency care with dedicated ICU and rapid response team.',
-                },
-              ].map((item, i) => (
-                <div
-                  key={item.title}
-                  className={`reveal delay-${(i + 1) * 100} card-hover bg-card rounded-2xl p-6 border border-border shadow-card`}
-                >
-                  <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
-                    <Icon name={item.icon as 'HeartIcon'} size={22} className="text-accent" />
-                  </div>
-                  <h3 className="text-primary font-semibold text-base mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+          <div className="lg:col-span-7 flex flex-col justify-between gap-8">
+            <div className="reveal delay-100 bg-card rounded-[2rem] p-8 md:p-10 border border-border shadow-card relative overflow-hidden group">
+              {/* Subtle background decoration */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-150" />
+              
+              <div className="relative z-10">
+                <h3 className="text-primary font-serif text-2xl mb-8 flex items-center gap-3">
+                  <span className="w-8 h-1 bg-accent rounded-full" />
+                  Why Choose Our Hospital?
+                </h3>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8">
+                  {[
+                    {
+                      icon: 'ShieldCheckIcon',
+                      title: 'ISO Certified Facility',
+                      desc: 'ISO 27001 certified for data security and standards.',
+                    },
+                    {
+                      icon: 'AcademicCapIcon',
+                      title: 'Gold Medalist Specialist',
+                      desc: 'Dr. Prashant Kashyap — DM Cardiology Gold Medalist.',
+                    },
+                    {
+                      icon: 'HeartIcon',
+                      title: 'Full-Spectrum Cardiology',
+                      desc: 'From ECG to Angioplasty & CRT — all under one roof.',
+                    },
+                    {
+                      icon: 'ClockIcon',
+                      title: '24/7 Emergency ICU',
+                      desc: 'Round-the-clock cardiac emergency care & ICU.',
+                    },
+                  ].map((item, i) => (
+                    <div
+                      key={item.title}
+                      className="flex items-start gap-4 transition-transform duration-300 hover:translate-x-1"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                        <Icon name={item.icon as 'HeartIcon'} size={20} className="text-accent" />
+                      </div>
+                      <div>
+                        <h4 className="text-primary font-semibold text-sm mb-1">{item.title}</h4>
+                        <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
 
             {/* Stats strip */}
-            <div className="reveal delay-500 grid grid-cols-3 gap-4 bg-primary rounded-2xl p-6">
+            <div className="reveal delay-300 grid grid-cols-3 gap-4 bg-primary rounded-[2rem] p-8 shadow-navy relative overflow-hidden">
+              {/* Subtle glow */}
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+              
               {[
                 { val: '50,000+', label: 'Patients Served' },
                 { val: '98%', label: 'Satisfaction Rate' },
                 { val: '12+', label: 'Years of Service' },
               ].map((s) => (
-                <div key={s.label} className="text-center">
-                  <div className="text-accent font-bold text-2xl stat-number font-serif">
+                <div key={s.label} className="text-center relative z-10">
+                  <div className="text-accent font-bold text-2xl md:text-3xl stat-number font-serif mb-1">
                     {s.val}
                   </div>
-                  <div className="text-white/60 text-xs mt-1">{s.label}</div>
+                  <div className="text-white/60 text-[10px] md:text-xs uppercase tracking-wider">{s.label}</div>
                 </div>
               ))}
             </div>

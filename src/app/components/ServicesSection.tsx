@@ -112,52 +112,85 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((svc, i) => (
-            <div
-              key={svc.id}
-              className={`reveal delay-${Math.min((i + 1) * 100, 500)} card-hover group relative overflow-hidden rounded-lg border ${cardTones[svc.tone]}`}
-            >
-              <div className={`absolute inset-x-0 top-0 h-1 ${accentBars[svc.tone]}`} />
-              <div className="flex h-full flex-col p-4">
-                <div className="mb-3 flex items-start justify-between gap-3">
-                  <div
-                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
-                      svc.tone === 'featured' ? 'bg-white/15' : 'bg-accent/10'
-                    }`}
-                  >
-                    <Icon
-                      name={svc.icon as 'HeartIcon'}
-                      size={19}
-                      className={svc.tone === 'featured' ? 'text-accent' : 'text-accent'}
-                    />
-                  </div>
-                  <span
-                    className={`rounded-full px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-wide ${
-                      tagColors[svc.tag] || 'bg-muted text-muted-foreground'
-                    }`}
-                  >
-                    {svc.tag}
-                  </span>
-                </div>
+        <div className="reveal delay-100 bg-white rounded-[2.5rem] p-8 md:p-12 shadow-card border border-border relative overflow-hidden group">
+          {/* Decorative background */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full -mr-32 -mt-32 transition-transform duration-1000 group-hover:scale-110" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full -ml-24 -mb-24 transition-transform duration-1000 group-hover:scale-110" />
 
-                <h3
-                  className={`mb-1.5 text-[0.98rem] font-bold leading-snug ${
-                    svc.tone === 'featured' ? 'text-white' : 'text-primary'
-                  }`}
-                >
-                  {svc.title}
+          <div className="relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+              {/* Left Column: Featured Service */}
+              <div className="lg:col-span-5">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-primary text-[10px] font-bold uppercase tracking-wider mb-6">
+                  Flagship Service
+                </div>
+                <h3 className="text-primary font-serif text-3xl md:text-4xl mb-6 leading-tight">
+                  Advanced <span className="teal-gradient-text italic">Cath Lab</span>
                 </h3>
-                <p
-                  className={`text-[0.82rem] leading-relaxed ${
-                    svc.tone === 'featured' ? 'text-white/75' : 'text-muted-foreground'
-                  }`}
-                >
-                  {svc.desc}
+                <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">
+                  Our state-of-the-art Philips Cath Lab brings metropolitan-standard cardiac interventions to Bihar, enabling life-saving procedures with extreme precision.
                 </p>
+                <div className="space-y-4">
+                  {['High-precision Angiography', 'Complex Angioplasty', 'Cardiac Intervention Support'].map((item) => (
+                    <div key={item} className="flex items-center gap-3">
+                      <div className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center">
+                        <svg className="w-3 h-3 text-accent" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-primary font-medium text-sm md:text-base">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Column: Other Services Grid */}
+              <div className="lg:col-span-7">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {[
+                    {
+                      title: 'Diagnostics',
+                      items: [
+                        { name: '2D & Stress Echo', icon: 'HeartIcon' },
+                        { name: 'TMT (Treadmill Test)', icon: 'ChartBarIcon' },
+                        { name: 'Holter Monitoring', icon: 'ClipboardDocumentListIcon' },
+                        { name: 'ECG & Imaging', icon: 'SignalIcon' },
+                      ],
+                    },
+                    {
+                      title: 'Specialized Care',
+                      items: [
+                        { name: 'Angioplasty & Stents', icon: 'BoltIcon' },
+                        { name: 'Pacemaker & ICD', icon: 'CpuChipIcon' },
+                        { name: '24/7 Cardiac ICU', icon: 'BuildingOffice2Icon' },
+                        { name: 'Emergency Support', icon: 'ShieldCheckIcon' },
+                      ],
+                    },
+                  ].map((cat) => (
+                    <div key={cat.title}>
+                      <h4 className="text-primary font-serif text-xl mb-5 flex items-center gap-2">
+                        <span className="w-1.5 h-6 bg-accent rounded-full" />
+                        {cat.title}
+                      </h4>
+                      <div className="space-y-3">
+                        {cat.items.map((svc) => (
+                          <div
+                            key={svc.name}
+                            className="flex items-center gap-3 p-3 rounded-2xl bg-muted/50 border border-border/50 transition-all hover:bg-white hover:shadow-sm hover:border-accent/30 group/item"
+                          >
+                            <div className="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center transition-colors group-hover/item:bg-accent/10">
+                              <Icon name={svc.icon as 'HeartIcon'} size={16} className="text-accent" />
+                            </div>
+                            <span className="text-primary text-xs font-semibold">{svc.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
 
         <div className="reveal mt-8 text-center">
