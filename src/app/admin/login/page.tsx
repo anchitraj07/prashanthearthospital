@@ -3,34 +3,44 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'prashant2024';
-
 export default function AdminLoginPage() {
   const router = useRouter();
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    setTimeout(() => {
-      if (password === ADMIN_PASSWORD) {
-        localStorage.setItem('phh_admin_token', 'authenticated');
-        router.push('/admin/dashboard');
-      } else {
-        setError('Incorrect password. Please try again.');
-        setLoading(false);
+    try {
+      const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+        credentials: 'same-origin',
+      });
+
+      const data = await response.json();
+      setLoading(false);
+
+      if (!response.ok) {
+        setError(data?.error || 'Invalid credentials. Please try again.');
+        return;
       }
-    }, 600);
+
+      router.push('/admin/dashboard');
+    } catch (err) {
+      setLoading(false);
+      setError('Unable to sign in right now. Please try again later.');
+      console.error('Admin login failed:', err);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0A1628] to-[#0d2040] px-4">
       <div className="w-full max-w-md">
-        {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#40c1b9]/20 border border-[#40c1b9]/30 mb-4">
             <span className="text-3xl">❤️</span>
@@ -39,7 +49,6 @@ export default function AdminLoginPage() {
           <p className="text-white/50 text-sm mt-1">Admin Portal</p>
         </div>
 
-        {/* Card */}
         <div className="bg-white rounded-3xl p-8 shadow-2xl">
           <h2 className="text-[#0A1628] text-xl font-semibold mb-1">Welcome back</h2>
           <p className="text-gray-500 text-sm mb-6">Enter your admin password to continue</p>
@@ -71,8 +80,19 @@ export default function AdminLoginPage() {
               {loading ? (
                 <>
                   <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                    />
                   </svg>
                   Signing in...
                 </>
@@ -81,10 +101,6 @@ export default function AdminLoginPage() {
               )}
             </button>
           </form>
-
-          <p className="text-center text-gray-400 text-xs mt-6">
-            Default password: <span className="font-mono text-[#0A1628]">prashant2024</span>
-          </p>
         </div>
 
         <p className="text-center text-white/30 text-xs mt-6">

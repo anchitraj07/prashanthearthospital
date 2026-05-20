@@ -10,6 +10,7 @@ import GallerySection from '@/app/components/GallerySection';
 import BlogSection from '@/app/components/BlogSection';
 import AppointmentSection from '@/app/components/AppointmentSection';
 import ContactSection from '@/app/components/ContactSection';
+import UpcomingHospitalSection from '@/app/components/UpcomingHospitalSection';
 import WhatsAppFloat from '@/app/components/WhatsAppFloat';
 import ScrollRevealInit from '@/app/components/ScrollRevealInit';
 
@@ -27,6 +28,7 @@ export default function HomePage() {
         <GallerySection />
         <BlogSection />
         <AppointmentSection />
+        <UpcomingHospitalSection />
         <ContactSection />
       </main>
       <Footer />

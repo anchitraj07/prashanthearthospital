@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
-import { supabase } from '@/lib/supabase';
 
 const services = [
   'General Cardiac Consultation',
@@ -43,7 +42,9 @@ export default function AppointmentSection() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -53,8 +54,10 @@ export default function AppointmentSection() {
     setErrorMsg('');
 
     try {
-      const { error } = await supabase.from('appointments').insert([
-        {
+      const response = await fetch('/api/appointments/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           full_name: form.name,
           phone: form.phone,
           email: form.email || null,
@@ -62,17 +65,46 @@ export default function AppointmentSection() {
           preferred_date: form.date,
           preferred_time: form.time || null,
           message: form.message || null,
-          appt_status: 'pending',
-        },
-      ]);
+        }),
+      });
 
-      if (error) throw error;
+      let result;
+      try {
+        result = await response.json();
+      } catch {
+        result = { error: `HTTP ${response.status}: Invalid JSON response` };
+      }
+
+      // eslint-disable-next-line no-console
+      console.log('Appointment API response:', response.status, JSON.stringify(result));
+
+      if (!response.ok) {
+        const errorMsg = result?.error || `HTTP ${response.status} error`;
+        throw new Error(errorMsg);
+      }
 
       setStatus('success');
       setForm(initialForm);
     } catch (err: unknown) {
-      console.error('Appointment booking error:', err);
-      setErrorMsg('Something went wrong. Please try again or call us directly.');
+      let errorMessage = 'Something went wrong. Please try again or call us directly.';
+
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      } else if (err instanceof TypeError) {
+        errorMessage = `Network error: ${err.message}`;
+      } else if (typeof err === 'string') {
+        errorMessage = err;
+      } else if (err && typeof err === 'object') {
+        try {
+          errorMessage = JSON.stringify(err);
+        } catch {
+          errorMessage = 'An unknown error occurred.';
+        }
+      }
+
+      // eslint-disable-next-line no-console
+      console.error('Appointment booking failed:', errorMessage, err);
+      setErrorMsg(errorMessage);
       setStatus('error');
     }
   };
@@ -93,12 +125,11 @@ export default function AppointmentSection() {
               <span className="section-label text-accent">Book Now</span>
             </div>
             <h2 className="text-section-xl font-serif text-white mb-5">
-              Book Your{' '}
-              <span className="teal-gradient-text italic">Appointment</span>
+              Book Your <span className="teal-gradient-text italic">Appointment</span>
             </h2>
             <p className="text-white/65 text-base leading-relaxed mb-10">
-              Schedule a consultation with Dr. Prashant Kashyap or one of our specialists.
-              Our team will confirm your appointment within 2 hours.
+              Schedule a consultation with Dr. Prashant Kashyap or one of our specialists. Our team
+              will confirm your appointment within 2 hours.
             </p>
 
             {/* Info cards */}
@@ -129,7 +160,10 @@ export default function AppointmentSection() {
                   sub: 'Bihar, India',
                 },
               ].map((item) => (
-                <div key={item.label} className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                <div
+                  key={item.label}
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10"
+                >
                   <div className="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <Icon name={item.icon as 'PhoneIcon'} size={18} className="text-accent" />
                   </div>
@@ -164,9 +198,12 @@ export default function AppointmentSection() {
                   <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-5">
                     <Icon name="CheckCircleIcon" size={32} className="text-green-600" />
                   </div>
-                  <h3 className="text-primary font-semibold text-xl mb-3 font-serif">Appointment Booked!</h3>
+                  <h3 className="text-primary font-semibold text-xl mb-3 font-serif">
+                    Appointment Booked!
+                  </h3>
                   <p className="text-muted-foreground text-base leading-relaxed mb-6">
-                    Thank you! Your appointment request has been received and saved. Our team will call you within 2 hours to confirm your slot.
+                    Thank you! Your appointment request has been received and saved. Our team will
+                    call you within 2 hours to confirm your slot.
                   </p>
                   <button
                     onClick={() => setStatus('idle')}
@@ -177,8 +214,12 @@ export default function AppointmentSection() {
                 </div>
               ) : (
                 <>
-                  <h3 className="text-primary font-semibold text-xl mb-1 font-serif">Request an Appointment</h3>
-                  <p className="text-muted-foreground text-sm mb-7">Fill in your details and we&apos;ll confirm within 2 hours.</p>
+                  <h3 className="text-primary font-semibold text-xl mb-1 font-serif">
+                    Request an Appointment
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-7">
+                    Fill in your details and we&apos;ll confirm within 2 hours.
+                  </p>
 
                   {status === 'error' && (
                     <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
@@ -189,7 +230,9 @@ export default function AppointmentSection() {
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-primary text-sm font-medium mb-1.5">Full Name *</label>
+                        <label className="block text-primary text-sm font-medium mb-1.5">
+                          Full Name *
+                        </label>
                         <input
                           type="text"
                           name="name"
@@ -201,7 +244,9 @@ export default function AppointmentSection() {
                         />
                       </div>
                       <div>
-                        <label className="block text-primary text-sm font-medium mb-1.5">Phone Number *</label>
+                        <label className="block text-primary text-sm font-medium mb-1.5">
+                          Phone Number *
+                        </label>
                         <input
                           type="tel"
                           name="phone"
@@ -215,7 +260,9 @@ export default function AppointmentSection() {
                     </div>
 
                     <div>
-                      <label className="block text-primary text-sm font-medium mb-1.5">Email Address</label>
+                      <label className="block text-primary text-sm font-medium mb-1.5">
+                        Email Address
+                      </label>
                       <input
                         type="email"
                         name="email"
@@ -227,7 +274,9 @@ export default function AppointmentSection() {
                     </div>
 
                     <div>
-                      <label className="block text-primary text-sm font-medium mb-1.5">Service Required *</label>
+                      <label className="block text-primary text-sm font-medium mb-1.5">
+                        Service Required *
+                      </label>
                       <select
                         name="service"
                         value={form.service}
@@ -237,14 +286,18 @@ export default function AppointmentSection() {
                       >
                         <option value="">Select a service</option>
                         {services.map((s) => (
-                          <option key={s} value={s}>{s}</option>
+                          <option key={s} value={s}>
+                            {s}
+                          </option>
                         ))}
                       </select>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-primary text-sm font-medium mb-1.5">Preferred Date *</label>
+                        <label className="block text-primary text-sm font-medium mb-1.5">
+                          Preferred Date *
+                        </label>
                         <input
                           type="date"
                           name="date"
@@ -255,7 +308,9 @@ export default function AppointmentSection() {
                         />
                       </div>
                       <div>
-                        <label className="block text-primary text-sm font-medium mb-1.5">Preferred Time</label>
+                        <label className="block text-primary text-sm font-medium mb-1.5">
+                          Preferred Time
+                        </label>
                         <select
                           name="time"
                           value={form.time}
@@ -272,7 +327,9 @@ export default function AppointmentSection() {
                     </div>
 
                     <div>
-                      <label className="block text-primary text-sm font-medium mb-1.5">Additional Notes</label>
+                      <label className="block text-primary text-sm font-medium mb-1.5">
+                        Additional Notes
+                      </label>
                       <textarea
                         name="message"
                         value={form.message}
@@ -291,8 +348,19 @@ export default function AppointmentSection() {
                       {status === 'submitting' ? (
                         <>
                           <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            />
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                            />
                           </svg>
                           Submitting...
                         </>
@@ -305,7 +373,8 @@ export default function AppointmentSection() {
                     </button>
 
                     <p className="text-muted-foreground text-xs text-center mt-2">
-                      🔒 Your information is secure and confidential. We will never share your details.
+                      🔒 Your information is secure and confidential. We will never share your
+                      details.
                     </p>
                   </form>
                 </>

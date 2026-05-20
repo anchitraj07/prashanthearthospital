@@ -13,9 +13,24 @@ const stats = [
 ];
 
 const awards = [
-  { title: 'DM Cardiology Gold Medalist', org: 'Academic Excellence Award', year: '2014', icon: '🏅' },
-  { title: 'Best Cardiac Centre — Bihar', org: 'Healthcare Excellence Awards', year: '2023', icon: '🏆' },
-  { title: 'ISO 27001 Certified', org: 'International Standards Organisation', year: '2022', icon: '🛡️' },
+  {
+    title: 'DM Cardiology Gold Medalist',
+    org: 'Academic Excellence Award',
+    year: '2014',
+    icon: '🏅',
+  },
+  {
+    title: 'Best Cardiac Centre — Bihar',
+    org: 'Healthcare Excellence Awards',
+    year: '2023',
+    icon: '🏆',
+  },
+  {
+    title: 'ISO 27001 Certified',
+    org: 'International Standards Organisation',
+    year: '2022',
+    icon: '🛡️',
+  },
   { title: 'Philips Cath Lab Partner', org: 'Philips Healthcare India', year: '2021', icon: '⭐' },
 ];
 
@@ -37,7 +52,7 @@ function useCountUp(target: number, isFloat: boolean, duration = 2000, start = f
   return count;
 }
 
-function StatCard({ stat, animate }: { stat: typeof stats[0]; animate: boolean }) {
+function StatCard({ stat, animate }: { stat: (typeof stats)[0]; animate: boolean }) {
   const count = useCountUp(stat.value, stat.isFloat ?? false, 2000, animate);
   return (
     <div className="card-hover bg-card rounded-2xl p-6 border border-border shadow-card text-center group">
@@ -45,7 +60,8 @@ function StatCard({ stat, animate }: { stat: typeof stats[0]; animate: boolean }
         <Icon name={stat.icon as 'StarIcon'} size={22} className="text-accent" />
       </div>
       <div className="text-3xl font-bold font-serif text-primary stat-number mb-1">
-        {count}{stat.suffix}
+        {count}
+        {stat.suffix}
       </div>
       <div className="text-muted-foreground text-sm">{stat.label}</div>
     </div>
@@ -58,7 +74,12 @@ export default function AchievementsSection() {
 
   useEffect(() => {
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setAnimate(true); obs.disconnect(); } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setAnimate(true);
+          obs.disconnect();
+        }
+      },
       { threshold: 0.2 }
     );
     if (sectionRef.current) obs.observe(sectionRef.current);
@@ -66,7 +87,11 @@ export default function AchievementsSection() {
   }, []);
 
   return (
-    <section id="achievements" className="section-pad bg-primary relative overflow-hidden" ref={sectionRef}>
+    <section
+      id="achievements"
+      className="section-pad bg-primary relative overflow-hidden"
+      ref={sectionRef}
+    >
       {/* Decorative */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px]" />
@@ -80,11 +105,11 @@ export default function AchievementsSection() {
             <span className="section-label text-accent">Recognition</span>
           </div>
           <h2 className="reveal delay-100 text-section-xl font-serif text-white">
-            Achievements &{' '}
-            <span className="teal-gradient-text italic">Awards</span>
+            Achievements & <span className="teal-gradient-text italic">Awards</span>
           </h2>
           <p className="reveal delay-200 text-white/60 text-base mt-4 max-w-lg mx-auto leading-relaxed">
-            Over a decade of clinical excellence, academic distinction, and patient-centred care — recognised across Bihar and beyond.
+            Over a decade of clinical excellence, academic distinction, and patient-centred care —
+            recognised across Bihar and beyond.
           </p>
         </div>
 
@@ -105,7 +130,9 @@ export default function AchievementsSection() {
               className={`reveal delay-${(i + 1) * 100} card-hover bg-white/5 border border-white/10 rounded-2xl p-6 group`}
             >
               <div className="text-4xl mb-4">{award.icon}</div>
-              <div className="text-accent text-xs font-semibold mb-1 section-label">{award.year}</div>
+              <div className="text-accent text-xs font-semibold mb-1 section-label">
+                {award.year}
+              </div>
               <h3 className="text-white font-semibold text-base mb-2">{award.title}</h3>
               <p className="text-white/50 text-xs">{award.org}</p>
             </div>

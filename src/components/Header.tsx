@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const navLinks = [
@@ -28,15 +29,19 @@ export default function Header() {
     } else {
       document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-slate-950/85 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,0.35)] py-3' : 'bg-slate-950/20 backdrop-blur-xl py-5'
+      className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-500 ${
+        scrolled || menuOpen
+          ? 'bg-slate-950 shadow-[0_25px_70px_rgba(0,0,0,0.45)] py-3'
+          : 'bg-slate-950/85 backdrop-blur-xl py-4 sm:py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
@@ -47,15 +52,19 @@ export default function Header() {
           aria-label="Prashant Heart Hospital Home"
         >
           <div className="flex items-center justify-center rounded-full bg-white/40 backdrop-blur-sm p-2 shadow-lg shadow-slate-950/30 border border-white/50">
-            <img
+            <Image
               src="/assets/images/Logo.png"
               alt="Prashant Heart Hospital Logo"
-              className="w-12 h-12 object-contain"
-              loading="eager"
+              width={48}
+              height={48}
+              className="object-contain"
+              priority
             />
           </div>
           <div>
-            <div className="text-white font-semibold text-base leading-tight drop-shadow-lg">Prashant Heart Hospital</div>
+            <div className="text-white font-semibold text-base leading-tight drop-shadow-lg">
+              Prashant Heart Hospital
+            </div>
             <div className="text-teal-200 text-xs leading-none uppercase tracking-[0.2em] drop-shadow-sm">
               Expert Cardiac Care
             </div>
@@ -82,8 +91,18 @@ export default function Header() {
             href="tel:+918002982980"
             className="inline-flex items-center gap-2 text-white/75 text-sm hover:text-white transition-colors"
           >
-            <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 6.75z" />
+            <svg
+              className="w-4 h-4 text-accent"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 6.75z"
+              />
             </svg>
             +91 80029 82980
           </a>
@@ -97,33 +116,44 @@ export default function Header() {
 
         {/* Mobile menu button */}
         <button
-          className="lg:hidden flex flex-col gap-1.5 p-2 rounded-lg text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="relative z-[1100] lg:hidden flex h-12 w-12 flex-col items-center justify-center gap-1.5 rounded-full border border-white/25 bg-slate-950 text-white shadow-[0_10px_30px_rgba(0,0,0,0.55)] transition-colors hover:bg-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
         >
-          <span className={`block w-6 h-0.5 bg-white rounded-full transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-          <span className={`block w-6 h-0.5 bg-white rounded-full transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
-          <span className={`block w-6 h-0.5 bg-white rounded-full transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          <span
+            className={`block w-6 h-0.5 bg-white rounded-full transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}
+          />
+          <span
+            className={`block w-6 h-0.5 bg-white rounded-full transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`}
+          />
+          <span
+            className={`block w-6 h-0.5 bg-white rounded-full transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}
+          />
         </button>
       </div>
       {/* Mobile menu overlay */}
       <div
-        className={`lg:hidden fixed inset-0 z-50 transition-all duration-300 ${
+        className={`lg:hidden fixed inset-0 z-[1050] text-white shadow-2xl transition-all duration-300 ${
           menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
-        style={{ background: 'rgba(11, 30, 61, 0.97)', backdropFilter: 'blur(20px)' }}
+        style={{
+          background: 'linear-gradient(180deg, #020817 0%, #071426 46%, #0b1e3d 100%)',
+        }}
       >
-        <div className="flex flex-col h-full px-6 pt-6 pb-10">
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="relative flex h-full flex-col px-6 pb-10 pt-6">
           {/* Mobile header */}
           <div className="flex items-center justify-between mb-10">
             <Link href="/" onClick={closeMenu} className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center">
-                <img
+                <Image
                   src="/assets/images/Logo.png"
                   alt="Prashant Heart Hospital Logo"
-                  className="w-6 h-6 object-contain"
-                  loading="eager"
+                  width={24}
+                  height={24}
+                  className="object-contain"
+                  priority
                 />
               </div>
               <span className="text-white font-semibold">Prashant Heart Hospital</span>
@@ -133,20 +163,26 @@ export default function Header() {
               className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
               aria-label="Close menu"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
 
           {/* Mobile nav links */}
-          <nav className="flex-1 flex flex-col gap-2">
+          <nav className="flex-1 flex flex-col gap-3">
             {navLinks?.map((link) => (
               <a
                 key={link?.label}
                 href={link?.href}
                 onClick={closeMenu}
-                className="text-white/80 text-2xl font-medium py-3 border-b border-white/10 hover:text-accent transition-colors"
+                className="rounded-lg border border-white/15 bg-slate-900 px-5 py-3.5 text-xl font-semibold text-white shadow-[0_12px_30px_rgba(0,0,0,0.25)] transition-colors hover:border-accent/60 hover:bg-slate-800 hover:text-accent"
               >
                 {link?.label}
               </a>

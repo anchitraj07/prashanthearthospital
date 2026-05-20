@@ -85,12 +85,29 @@ cd Prashant-Heart-Hospital
 npm install
 ```
 
-3. Start the development server:
+3. Copy `.env.local.example` to `.env.local` and replace the placeholders with your Supabase values.
+
+```bash
+copy .env.local.example .env.local
+```
+
+4. Create a Supabase project at https://app.supabase.com and note these values:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+
+5. In Supabase, create the `appointments` table using the migration in `supabase/migrations/20260506213717_prashant_heart_hospital.sql` or paste that SQL into the SQL editor.
+
+6. Make sure RLS is enabled and the policies are applied. The repository already includes RLS policy SQL in `supabase/migrations/20260506213717_prashant_heart_hospital.sql` and `supabase/migrations/20260517103000_rls_policy_updates.sql`.
+
+7. Set `ADMIN_PASSWORD` to a strong secret and `ADMIN_SESSION_SECRET` to a long random string.
+
+8. Start the development server:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:4028](http://localhost:4028) in your browser.
+9. Open [http://localhost:4028](http://localhost:4028) in your browser.
 
 ## 📁 Project Structure
 

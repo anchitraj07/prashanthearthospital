@@ -4,24 +4,39 @@ import { useEffect } from 'react';
 
 export default function ScrollRevealInit() {
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -60px 0px',
+    const revealEls = Array.from(
+      document.querySelectorAll<HTMLElement>('.reveal, .reveal-left, .reveal-right')
+    );
+
+    if (revealEls.length === 0) {
+      return;
+    }
+
+    const reveal = (el: HTMLElement) => {
+      el.classList.add('active');
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          observer.unobserve(entry.target);
+    const checkReveal = () => {
+      revealEls.forEach((el) => {
+        if (el.classList.contains('active')) {
+          return;
+        }
+
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight - 80 && rect.bottom >= 0) {
+          reveal(el);
         }
       });
-    }, observerOptions);
+    };
 
-    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    revealEls?.forEach((el) => observer?.observe(el));
+    checkReveal();
+    window.addEventListener('scroll', checkReveal, { passive: true });
+    window.addEventListener('resize', checkReveal);
 
-    return () => observer?.disconnect();
+    return () => {
+      window.removeEventListener('scroll', checkReveal);
+      window.removeEventListener('resize', checkReveal);
+    };
   }, []);
 
   return null;

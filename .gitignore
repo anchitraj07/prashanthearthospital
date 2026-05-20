@@ -24,6 +24,10 @@ Thumbs.db
 # Optional: if using TypeScript
 *.tsbuildinfo
 
+# Environment files
+.env
+.env.local
+
 # Optional: if using testing tools
 coverage/
 jest-test-results.json
@@ -34,3 +38,5 @@ jest-test-results.json
 
 # Optional: if using TurboRepo or monorepo
 turbo/
+# Local Netlify folder
+.netlify
