@@ -4,7 +4,7 @@ A professional website for Prashant Heart Hospital showcasing world-class cardio
 
 ## 🌐 Live Website
 
-Visit the live website: [https://prashant-heart-hospital.netlify.app/](https://prashant-heart-hospital.netlify.app/)
+Visit the live website: [https://anchitraj07.github.io/prashanthearthospital/](https://anchitraj07.github.io/prashanthearthospital/)
 
 ## 🚀 Features
 
