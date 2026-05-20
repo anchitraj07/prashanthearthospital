@@ -91,124 +91,131 @@ const accentBars: Record<string, string> = {
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="relative overflow-hidden bg-muted py-10 md:py-12 lg:py-14">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="blob-teal absolute left-10 top-10 h-56 w-56 opacity-20" />
+    <section id="services" className="relative py-12 md:py-16 overflow-hidden">
+      {/* Background with Cath Lab Image */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-primary/85 backdrop-blur-sm z-10" />
+        <Image
+          src="/assets/images/Cath Lab.png"
+          alt="Cath Lab Background"
+          fill
+          className="object-cover"
+          priority
+          unoptimized
+        />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div className="text-center md:text-left">
-            <div className="reveal mb-3 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3 py-1">
-              <span className="section-label text-accent">Services</span>
-            </div>
-            <h2 className="reveal delay-100 font-serif text-3xl leading-tight text-primary sm:text-4xl lg:text-5xl">
-              Cardiac <span className="teal-gradient-text italic">Services</span>
-            </h2>
+      <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mb-10 text-center">
+          <div className="reveal mb-3 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3 py-1">
+            <span className="section-label text-accent">Clinical Excellence</span>
           </div>
-          <p className="reveal delay-200 max-w-xl text-sm sm:text-base leading-relaxed text-muted-foreground text-center md:text-right">
-            Diagnostics, interventions, rhythm care, and emergency support in one easy-to-scan care
-            menu.
-          </p>
+          <h2 className="reveal delay-100 font-serif text-3xl md:text-5xl text-white">
+            Comprehensive <span className="teal-gradient-text italic">Cardiac Services</span>
+          </h2>
         </div>
 
-        <div className="reveal delay-100 bg-white rounded-[2.5rem] p-8 md:p-12 shadow-card border border-border relative overflow-hidden group">
-          {/* Decorative background */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full -mr-32 -mt-32 transition-transform duration-1000 group-hover:scale-110" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full -ml-24 -mb-24 transition-transform duration-1000 group-hover:scale-110" />
-
-          <div className="relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              {/* Left Column: Featured Service */}
-              <div className="lg:col-span-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-primary text-[10px] font-bold uppercase tracking-wider mb-6">
-                  Flagship Service
-                </div>
-                <h3 className="text-primary font-serif text-3xl md:text-4xl mb-6 leading-tight">
-                  Advanced <span className="teal-gradient-text italic">Cath Lab</span>
-                </h3>
-                <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">
-                  Our state-of-the-art Philips Cath Lab brings metropolitan-standard cardiac interventions to Bihar, enabling life-saving procedures with extreme precision.
-                </p>
-                <div className="space-y-4">
-                  {['High-precision Angiography', 'Complex Angioplasty', 'Cardiac Intervention Support'].map((item) => (
-                    <div key={item} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center">
-                        <svg className="w-3 h-3 text-accent" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <span className="text-primary font-medium text-sm md:text-base">{item}</span>
+        <div className="bg-white/5 border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-xl shadow-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            {/* Diagnostics Column */}
+            <div className="reveal delay-200">
+              <h3 className="text-accent font-serif text-2xl mb-8 flex items-center gap-3">
+                <span className="w-1.5 h-6 bg-accent rounded-full" />
+                Advanced Diagnostics
+              </h3>
+              <div className="space-y-6">
+                {[
+                  {
+                    name: '2D & Stress Echo',
+                    icon: 'HeartIcon',
+                    detail: 'High-resolution imaging to assess heart structure, valves, and blood flow patterns.',
+                  },
+                  {
+                    name: 'TMT (Treadmill Test)',
+                    icon: 'ChartBarIcon',
+                    detail: 'Stress testing to evaluate how your heart handles physical activity and exertion.',
+                  },
+                  {
+                    name: 'Holter Monitoring',
+                    icon: 'ClipboardDocumentListIcon',
+                    detail: '24-48 hour continuous ECG recording to detect irregular rhythms and silent issues.',
+                  },
+                  {
+                    name: 'ECG & Imaging',
+                    icon: 'SignalIcon',
+                    detail: 'Rapid electrical activity mapping and specialized imaging for accurate diagnosis.',
+                  },
+                ].map((svc) => (
+                  <div key={svc.name} className="group flex items-start gap-4 transition-all duration-300">
+                    <div className="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent group-hover:scale-110 transition-all">
+                      <Icon name={svc.icon as 'HeartIcon'} size={20} className="text-accent group-hover:text-primary" />
                     </div>
-                  ))}
-                </div>
+                    <div>
+                      <h4 className="text-white font-semibold text-base mb-1">{svc.name}</h4>
+                      <p className="text-white/60 text-xs leading-relaxed">{svc.detail}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
+            </div>
 
-              {/* Right Column: Other Services Grid */}
-              <div className="lg:col-span-7">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {[
-                    {
-                      title: 'Diagnostics',
-                      items: [
-                        { name: '2D & Stress Echo', icon: 'HeartIcon' },
-                        { name: 'TMT (Treadmill Test)', icon: 'ChartBarIcon' },
-                        { name: 'Holter Monitoring', icon: 'ClipboardDocumentListIcon' },
-                        { name: 'ECG & Imaging', icon: 'SignalIcon' },
-                      ],
-                    },
-                    {
-                      title: 'Specialized Care',
-                      items: [
-                        { name: 'Angioplasty & Stents', icon: 'BoltIcon' },
-                        { name: 'Pacemaker & ICD', icon: 'CpuChipIcon' },
-                        { name: '24/7 Cardiac ICU', icon: 'BuildingOffice2Icon' },
-                        { name: 'Emergency Support', icon: 'ShieldCheckIcon' },
-                      ],
-                    },
-                  ].map((cat) => (
-                    <div key={cat.title}>
-                      <h4 className="text-primary font-serif text-xl mb-5 flex items-center gap-2">
-                        <span className="w-1.5 h-6 bg-accent rounded-full" />
-                        {cat.title}
-                      </h4>
-                      <div className="space-y-3">
-                        {cat.items.map((svc) => (
-                          <div
-                            key={svc.name}
-                            className="flex items-center gap-3 p-3 rounded-2xl bg-muted/50 border border-border/50 transition-all hover:bg-white hover:shadow-sm hover:border-accent/30 group/item"
-                          >
-                            <div className="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center transition-colors group-hover/item:bg-accent/10">
-                              <Icon name={svc.icon as 'HeartIcon'} size={16} className="text-accent" />
-                            </div>
-                            <span className="text-primary text-xs font-semibold">{svc.name}</span>
-                          </div>
-                        ))}
-                      </div>
+            {/* Specialized Care Column */}
+            <div className="reveal delay-300">
+              <h3 className="text-accent font-serif text-2xl mb-8 flex items-center gap-3">
+                <span className="w-1.5 h-6 bg-accent rounded-full" />
+                Specialized Interventions
+              </h3>
+              <div className="space-y-6">
+                {[
+                  {
+                    name: 'Angioplasty & Stents',
+                    icon: 'BoltIcon',
+                    detail: 'Life-saving procedures to clear blockages and restore blood flow using advanced Philips tech.',
+                  },
+                  {
+                    name: 'Pacemaker & ICD',
+                    icon: 'CpuChipIcon',
+                    detail: 'Expert implantation of devices to regulate heart rhythm and prevent sudden failure.',
+                  },
+                  {
+                    name: '24/7 Cardiac ICU',
+                    icon: 'BuildingOffice2Icon',
+                    detail: 'Round-the-clock intensive monitoring with dedicated specialists and rapid response.',
+                  },
+                  {
+                    name: 'Emergency Support',
+                    icon: 'ShieldCheckIcon',
+                    detail: 'Immediate interventional care for heart attacks and critical cardiac emergencies.',
+                  },
+                ].map((svc) => (
+                  <div key={svc.name} className="group flex items-start gap-4 transition-all duration-300">
+                    <div className="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent group-hover:scale-110 transition-all">
+                      <Icon name={svc.icon as 'HeartIcon'} size={20} className="text-accent group-hover:text-primary" />
                     </div>
-                  ))}
-                </div>
+                    <div>
+                      <h4 className="text-white font-semibold text-base mb-1">{svc.name}</h4>
+                      <p className="text-white/60 text-xs leading-relaxed">{svc.detail}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="reveal mt-8 text-center">
-          <a
-            href="#appointment"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-navy active:scale-95"
-          >
-            Book a Consultation
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              viewBox="0 0 24 24"
+          <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <p className="text-white/50 text-sm italic max-w-md text-center sm:text-left">
+              * All procedures are performed in our Philips Advanced Cath Lab by Gold Medalist specialists.
+            </p>
+            <a
+              href="#appointment"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-sm font-bold text-primary transition-all duration-300 hover:scale-105 hover:shadow-teal active:scale-95"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 5l7 7-7 7" />
-            </svg>
-          </a>
+              Book Consultation
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
