@@ -1,0 +1,16 @@
+{
+  "/api/admin/appointments/[id]/route": "app/api/admin/appointments/[id]/route.js",
+  "/api/admin/appointments/route": "app/api/admin/appointments/route.js",
+  "/api/admin/login/route": "app/api/admin/login/route.js",
+  "/api/admin/logout/route": "app/api/admin/logout/route.js",
+  "/api/appointments/book/route": "app/api/appointments/book/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/admin/dashboard/page": "app/admin/dashboard/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/admin/login/page": "app/admin/login/page.js",
+  "/auth/login/page": "app/auth/login/page.js",
+  "/auth/page": "app/auth/page.js",
+  "/page": "app/page.js",
+  "/auth/register/page": "app/auth/register/page.js"
+}
