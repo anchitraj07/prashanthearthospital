@@ -1,4 +1,10 @@
 node_modules/
 .env
+.env*.local
 dist/
 build/
+.next/
+out/
+.netlify/
+*.log
+.DS_Store
