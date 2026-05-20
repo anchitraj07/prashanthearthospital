@@ -97,8 +97,8 @@ export default function ServicesSection() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
+        <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="text-center md:text-left">
             <div className="reveal mb-3 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3 py-1">
               <span className="section-label text-accent">Services</span>
             </div>
@@ -106,13 +106,13 @@ export default function ServicesSection() {
               Cardiac <span className="teal-gradient-text italic">Services</span>
             </h2>
           </div>
-          <p className="reveal delay-200 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-right">
+          <p className="reveal delay-200 max-w-xl text-sm sm:text-base leading-relaxed text-muted-foreground text-center md:text-right">
             Diagnostics, interventions, rhythm care, and emergency support in one easy-to-scan care
             menu.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((svc, i) => (
             <div
               key={svc.id}

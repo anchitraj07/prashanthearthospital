@@ -87,14 +87,14 @@ export default function TestimonialsSection() {
           {/* Main testimonial */}
           <div className="reveal">
             <div
-              className="bg-card rounded-3xl p-8 md:p-10 border border-border shadow-card relative overflow-hidden"
+              className="bg-card rounded-3xl p-6 sm:p-8 md:p-10 border border-border shadow-card relative overflow-hidden"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               onFocus={() => setIsPaused(true)}
               onBlur={() => setIsPaused(false)}
             >
               {/* Quote mark */}
-              <div className="absolute top-6 right-8 text-8xl font-serif text-accent/10 leading-none select-none pointer-events-none">
+              <div className="absolute top-4 sm:top-6 right-6 sm:right-8 text-6xl sm:text-8xl font-serif text-accent/10 leading-none select-none pointer-events-none">
                 &ldquo;
               </div>
 
@@ -103,7 +103,7 @@ export default function TestimonialsSection() {
                 {Array.from({ length: current?.rating })?.map((_, i) => (
                   <svg
                     key={i}
-                    className="w-5 h-5 text-yellow-400"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -112,18 +112,18 @@ export default function TestimonialsSection() {
                 ))}
               </div>
 
-              <blockquote className="text-primary text-xl leading-relaxed mb-8 font-serif italic">
+              <blockquote className="text-primary text-lg sm:text-xl leading-relaxed mb-8 font-serif italic">
                 &ldquo;{current?.quote}&rdquo;
               </blockquote>
 
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <div className="text-primary font-semibold text-base">{current?.name}</div>
                   <div className="text-muted-foreground text-sm mt-0.5">{current?.location}</div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   {current?.verified && (
-                    <span className="inline-flex items-center gap-1 bg-green-50 text-green-700 text-xs font-medium px-3 py-1 rounded-full border border-green-200">
+                    <span className="inline-flex items-center gap-1 bg-green-50 text-green-700 text-[10px] sm:text-xs font-medium px-2.5 py-1 rounded-full border border-green-200">
                       <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                         <path
                           fillRule="evenodd"
@@ -134,7 +134,7 @@ export default function TestimonialsSection() {
                       Verified
                     </span>
                   )}
-                  <span className="bg-accent/10 text-accent text-xs px-3 py-1 rounded-full font-medium">
+                  <span className="bg-accent/10 text-accent text-[10px] sm:text-xs px-2.5 py-1 rounded-full font-medium">
                     {current?.procedure}
                   </span>
                 </div>

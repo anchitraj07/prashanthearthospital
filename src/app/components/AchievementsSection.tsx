@@ -114,7 +114,7 @@ export default function AchievementsSection() {
         </div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-14">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-5 mb-14">
           {stats.map((stat, i) => (
             <div key={stat.label} className={`reveal delay-${Math.min((i + 1) * 100, 500)}`}>
               <StatCard stat={stat} animate={animate} />

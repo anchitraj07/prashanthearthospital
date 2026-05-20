@@ -21,9 +21,9 @@ export default function ContactSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* Left: Contact cards */}
-          <div className="lg:col-span-6 flex flex-col gap-5 reveal-left">
+          <div className="lg:col-span-6 flex flex-col gap-6 reveal-left">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
                 {
@@ -69,7 +69,7 @@ export default function ContactSection() {
                   <div className="min-w-0 flex-1">
                     <div className="text-primary font-semibold text-sm mb-1">{item.title}</div>
                     {item.lines.map((line, i) => (
-                      <div key={i} className="text-muted-foreground text-sm break-words">
+                      <div key={i} className="text-muted-foreground text-xs sm:text-sm break-words leading-relaxed">
                         {line}
                       </div>
                     ))}

@@ -38,7 +38,7 @@ function TeamPhotoCarousel() {
   }, []);
 
   return (
-    <div className="h-full min-h-[24rem] sm:min-h-[30rem] lg:min-h-[40rem] relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/30 bg-slate-900">
+    <div className="h-full min-h-[20rem] sm:min-h-[28rem] md:min-h-[32rem] lg:min-h-[40rem] relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/30 bg-slate-900">
       <div className="relative h-full">
         {teamPhotos.map((photo, index) => (
           <div
@@ -153,7 +153,7 @@ function FacilityCarousel() {
   }, []);
 
   return (
-    <div className="h-full min-h-[24rem] sm:min-h-[30rem] lg:min-h-[40rem]">
+    <div className="h-full min-h-[20rem] sm:min-h-[28rem] md:min-h-[32rem] lg:min-h-[40rem]">
       <div className="h-full relative rounded-[2rem] overflow-hidden shadow-2xl shadow-slate-900/20 bg-slate-950">
         <div className="relative h-full">
           {facilityItems.map((item, index) => (

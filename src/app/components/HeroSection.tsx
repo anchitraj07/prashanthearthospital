@@ -46,10 +46,10 @@ export default function HeroSection() {
       {/* Atmospheric teal glow */}
       <div className="absolute top-1/3 right-1/4 w-96 h-96 blob-teal z-10 pointer-events-none" />
       {/* Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-8 pb-12 pt-28">
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-8 pb-12 pt-32 sm:pt-40 md:pt-48 lg:pt-28">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-end">
           {/* Left: Hero text */}
-          <div>
+          <div className="text-center lg:text-left">
             {/* Eyebrow */}
             <div
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/10 mb-6"
@@ -67,13 +67,13 @@ export default function HeroSection() {
               World-Class
               <br />
               <span className="teal-gradient-text">Heart Care</span>
-              <br />
-              <span className="opacity-80 font-normal italic">in Bihar.</span>
+              <br className="hidden sm:block" />
+              <span className="opacity-80 font-normal italic"> in Bihar.</span>
             </h1>
 
             {/* Subheadline */}
             <p
-              className="text-white/75 text-lg leading-relaxed max-w-lg mb-10"
+              className="text-white/75 text-base sm:text-lg leading-relaxed max-w-lg mb-10 mx-auto lg:mx-0"
               style={{ animation: 'fadeInUp 0.8s ease-out 0.7s both' }}
             >
               Led by Dr. Prashant Kashyap — DM Cardiology, Gold Medalist — Prashant Heart Hospital
@@ -83,12 +83,12 @@ export default function HeroSection() {
 
             {/* CTAs */}
             <div
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4"
               style={{ animation: 'fadeInScale 0.8s ease-out 0.9s both' }}
             >
               <Link
                 href="#appointment"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-primary font-semibold text-base transition-all duration-300 hover:shadow-teal hover:scale-105 active:scale-95"
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-accent text-primary font-semibold text-base transition-all duration-300 hover:shadow-teal hover:scale-105 active:scale-95"
               >
                 Book Appointment
                 <svg
@@ -103,7 +103,7 @@ export default function HeroSection() {
               </Link>
               <Link
                 href="#services"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/25 text-white font-medium text-base backdrop-blur-sm bg-white/5 hover:bg-white/15 transition-all duration-300"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-white/25 text-white font-medium text-base backdrop-blur-sm bg-white/5 hover:bg-white/15 transition-all duration-300"
               >
                 Our Services
               </Link>
@@ -111,7 +111,7 @@ export default function HeroSection() {
 
             {/* Trust strip */}
             <div
-              className="flex flex-wrap items-center gap-4 sm:gap-6 mt-10 pt-8 border-t border-white/15"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-6 sm:gap-10 mt-10 pt-8 border-t border-white/15"
               style={{ animation: 'fadeInUp 0.6s ease-out 1.1s both' }}
             >
               {[
@@ -119,9 +119,9 @@ export default function HeroSection() {
                 { val: '4.9★', label: 'Avg. Rating' },
                 { val: '24/7', label: 'Emergency Care' },
               ]?.map((s) => (
-                <div key={s?.label} className="text-center">
-                  <div className="text-accent font-bold text-xl stat-number">{s?.val}</div>
-                  <div className="text-white/55 text-xs mt-0.5">{s?.label}</div>
+                <div key={s?.label} className="text-center lg:text-left">
+                  <div className="text-accent font-bold text-xl sm:text-2xl stat-number">{s?.val}</div>
+                  <div className="text-white/55 text-xs uppercase tracking-wider mt-0.5">{s?.label}</div>
                 </div>
               ))}
             </div>

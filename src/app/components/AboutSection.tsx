@@ -265,15 +265,15 @@ export default function AboutSection() {
                 Row 1: [col-1: DrPrashant cs-1] [col-2: DrSeep cs-1] [col-3: DrDinesh cs-1]
                 Placed 3/3 ✓
              */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {staff.map((doc, i) => (
               <div
                 key={doc.name}
                 onClick={() => openModal(doc)}
-                className={`reveal delay-${(i + 1) * 100} card-hover group relative rounded-3xl overflow-hidden border border-border shadow-card bg-card cursor-pointer`}
+                className={`reveal delay-${(i + 1) * 100} card-hover group relative rounded-3xl overflow-hidden border border-border shadow-card bg-card cursor-pointer flex flex-col`}
               >
                 {/* Photo */}
-                <div className="relative aspect-[4/5] overflow-hidden bg-slate-100">
+                <div className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] overflow-hidden bg-slate-100">
                   <AppImage
                     src={doc.photo}
                     alt={doc.alt}
@@ -285,8 +285,8 @@ export default function AboutSection() {
 
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
                   
-                  {/* View Details Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {/* View Details Overlay - Hidden on touch devices to avoid confusion, or made simpler */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                     <div className="bg-white/20 backdrop-blur-md border border-white/30 px-6 py-2 rounded-full text-white font-medium flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                       <span>View Profile</span>
                       <Icon name="ArrowRightIcon" size={16} />
@@ -294,25 +294,25 @@ export default function AboutSection() {
                   </div>
 
                   {doc.badge && (
-                    <div className="absolute top-4 right-4 bg-yellow-400 text-primary text-xs font-bold px-3 py-1 rounded-full">
+                    <div className="absolute top-4 right-4 bg-yellow-400 text-primary text-[10px] sm:text-xs font-bold px-2 sm:px-3 py-1 rounded-full shadow-lg">
                       🏅 {doc.badge}
                     </div>
                   )}
                 </div>
 
                 {/* Info */}
-                <div className="p-6">
-                  <h3 className="text-primary font-semibold text-lg mb-1">{doc.name}</h3>
+                <div className="p-5 sm:p-6 flex-grow flex flex-col">
+                  <h3 className="text-primary font-semibold text-lg sm:text-xl mb-1">{doc.name}</h3>
                   <p className="text-accent text-sm font-medium mb-2">{doc.role}</p>
-                  <p className="text-muted-foreground text-xs mb-4 leading-relaxed">{doc.quals}</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="bg-muted text-muted-foreground text-xs px-3 py-1 rounded-full">
+                  <p className="text-muted-foreground text-xs mb-4 leading-relaxed line-clamp-2">{doc.quals}</p>
+                  <div className="mt-auto flex flex-wrap gap-2">
+                    <span className="bg-muted text-muted-foreground text-[10px] sm:text-xs px-2.5 py-1 rounded-full">
                       {doc.exp}
                     </span>
-                    <span className="bg-muted text-muted-foreground text-xs px-3 py-1 rounded-full">
+                    <span className="bg-muted text-muted-foreground text-[10px] sm:text-xs px-2.5 py-1 rounded-full">
                       {doc.patients} Patients
                     </span>
-                    <span className="bg-accent/10 text-accent text-xs px-3 py-1 rounded-full font-semibold">
+                    <span className="bg-accent/10 text-accent text-[10px] sm:text-xs px-2.5 py-1 rounded-full font-semibold">
                       {doc.rating}
                     </span>
                   </div>
