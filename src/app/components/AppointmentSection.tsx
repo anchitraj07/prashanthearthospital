@@ -54,58 +54,26 @@ export default function AppointmentSection() {
     setErrorMsg('');
 
     try {
-      const response = await fetch('/api/appointments/book', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          full_name: form.name,
-          phone: form.phone,
-          email: form.email || null,
-          service: form.service,
-          preferred_date: form.date,
-          preferred_time: form.time || null,
-          message: form.message || null,
-        }),
-      });
+      // Create WhatsApp message
+      const message = `Hello Prashant Heart Hospital, I would like to book an appointment:
+- Name: ${form.name}
+- Phone: ${form.phone}
+- Email: ${form.email || 'N/A'}
+- Service: ${form.service}
+- Date: ${form.date}
+- Time: ${form.time || 'N/A'}
+- Message: ${form.message || 'N/A'}`;
 
-      let result;
-      try {
-        result = await response.json();
-      } catch {
-        result = { error: `HTTP ${response.status}: Invalid JSON response` };
-      }
-
-      // eslint-disable-next-line no-console
-      console.log('Appointment API response:', response.status, JSON.stringify(result));
-
-      if (!response.ok) {
-        const errorMsg = result?.error || `HTTP ${response.status} error`;
-        throw new Error(errorMsg);
-      }
+      const whatsappUrl = `https://wa.me/918084388876?text=${encodeURIComponent(message)}`;
+      
+      // Open WhatsApp in a new tab
+      window.open(whatsappUrl, '_blank');
 
       setStatus('success');
       setForm(initialForm);
     } catch (err: unknown) {
-      let errorMessage = 'Something went wrong. Please try again or call us directly.';
-
-      if (err instanceof Error) {
-        errorMessage = err.message;
-      } else if (err instanceof TypeError) {
-        errorMessage = `Network error: ${err.message}`;
-      } else if (typeof err === 'string') {
-        errorMessage = err;
-      } else if (err && typeof err === 'object') {
-        try {
-          errorMessage = JSON.stringify(err);
-        } catch {
-          errorMessage = 'An unknown error occurred.';
-        }
-      }
-
-      // eslint-disable-next-line no-console
-      console.error('Appointment booking failed:', errorMessage, err);
-      setErrorMsg(errorMessage);
       setStatus('error');
+      setErrorMsg('Something went wrong. Please try again or call us directly.');
     }
   };
 
