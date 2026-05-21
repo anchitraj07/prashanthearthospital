@@ -53,13 +53,13 @@ export default function ContactSection() {
                 ))}
               </div>
 
-              {/* YouTube CTA */}
-              <div className="mt-10 pt-8 border-t border-border">
+              {/* Social CTAs */}
+              <div className="mt-10 pt-8 border-t border-border flex flex-wrap gap-4">
                 <a
                   href="https://www.youtube.com/@DrPrashantKashyap-Cardiologist"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white border border-border text-muted-foreground hover:text-red-600 hover:border-red-600/40 transition-all shadow-sm group"
+                  className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-white border border-border text-muted-foreground hover:text-red-600 hover:border-red-600/40 hover:bg-red-50/30 transition-all shadow-sm group"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,32 @@ export default function ContactSection() {
                     <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
                     <path d="m10 15 5-3-5-3z" />
                   </svg>
-                  <span className="text-sm font-semibold uppercase tracking-wider">Watch on YouTube</span>
+                  <span className="text-xs font-bold uppercase tracking-wider">YouTube</span>
+                </a>
+                
+                <a
+                  href="https://www.instagram.com/dr.prashantkashyapcardiologist?igsh=bnY1NTl6OW02bmMx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-white border border-border text-muted-foreground hover:text-[#E4405F] hover:border-[#E4405F]/40 hover:bg-[#E4405F]/5 transition-all shadow-sm group"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="transition-colors group-hover:stroke-[#E4405F]"
+                  >
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                  </svg>
+                  <span className="text-xs font-bold uppercase tracking-wider">Instagram</span>
                 </a>
               </div>
             </div>
