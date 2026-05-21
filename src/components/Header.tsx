@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import AppLogo from '@/components/ui/AppLogo';
 
 const navLinks = [
   { label: 'About', href: '#about' },
@@ -48,26 +49,30 @@ export default function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-3 group bg-slate-950/35 backdrop-blur-xl border border-white/10 rounded-full px-3 py-2 hover:bg-slate-950/50 transition-all duration-300"
+          className="flex items-center gap-4 group"
           aria-label="Prashant Heart Hospital Home"
         >
-          <div className="flex items-center justify-center rounded-full bg-white/40 backdrop-blur-sm p-2 shadow-lg shadow-slate-950/30 border border-white/50">
-            <Image
-              src="/assets/images/Logo.png"
-              alt="Prashant Heart Hospital Logo"
-              width={48}
-              height={48}
-              className="object-contain"
-              priority
-            />
+          <div className="relative">
+            {/* Outer ring */}
+            <div className="absolute -inset-1.5 bg-gradient-to-tr from-accent to-teal-400 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500" />
+            
+            {/* Logo Container */}
+            <div className="relative flex items-center justify-center rounded-2xl bg-slate-900/80 backdrop-blur-md p-2.5 shadow-xl border border-white/10 group-hover:border-accent/30 transition-all duration-500">
+              <AppLogo 
+                src="/assets/images/Logo.png" 
+                size={42} 
+                className="rounded-xl"
+              />
+            </div>
           </div>
-          <div>
-            <div className="text-white font-semibold text-base leading-tight drop-shadow-lg">
-              Prashant Heart Hospital
-            </div>
-            <div className="text-teal-200 text-xs leading-none uppercase tracking-[0.2em] drop-shadow-sm">
-              Expert Cardiac Care
-            </div>
+          
+          <div className="flex flex-col">
+            <span className="text-white font-serif text-lg md:text-xl leading-none tracking-tight group-hover:text-accent transition-colors duration-300">
+              Prashant <span className="text-accent">Heart</span>
+            </span>
+            <span className="text-teal-200/60 text-[10px] uppercase tracking-[0.3em] mt-1 font-medium">
+              Hospital
+            </span>
           </div>
         </Link>
 

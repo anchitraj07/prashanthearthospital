@@ -30,19 +30,26 @@ const AppLogo = memo(function AppLogo({
   return (
     <div className={containerClassName} onClick={onClick}>
       {/* Show image if src provided, otherwise show icon */}
-      {src ? (
-        <AppImage
-          src={src}
-          alt="Logo"
-          width={size}
-          height={size}
-          className="flex-shrink-0"
-          priority={true}
-          unoptimized={src.endsWith('.svg')}
-        />
-      ) : (
-        <AppIcon name={iconName} size={size} className="flex-shrink-0" />
-      )}
+      <div className="relative group/logo">
+        {/* Glow effect */}
+        <div className="absolute inset-0 bg-accent/20 blur-xl rounded-full opacity-0 group-hover/logo:opacity-100 transition-opacity duration-500" />
+        
+        <div className="relative z-10">
+          {src ? (
+            <AppImage
+              src={src}
+              alt="Logo"
+              width={size}
+              height={size}
+              className="flex-shrink-0 transition-transform duration-500 group-hover/logo:scale-110"
+              priority={true}
+              unoptimized={src.endsWith('.svg')}
+            />
+          ) : (
+            <AppIcon name={iconName} size={size} className="flex-shrink-0" />
+          )}
+        </div>
+      </div>
     </div>
   );
 });

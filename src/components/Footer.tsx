@@ -9,13 +9,18 @@ export default function Footer() {
         {/* Main footer row */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-white/10">
           {/* Brand */}
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl overflow-hidden bg-accent/10 border border-accent/30 flex items-center justify-center">
-              <AppLogo src="/assets/images/Logo.png" size={36} className="rounded-xl" />
+          <div className="flex items-center gap-4 group">
+            <div className="relative">
+              <div className="absolute -inset-1 bg-accent/20 rounded-xl blur group-hover:opacity-40 transition duration-500" />
+              <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-slate-900 border border-white/10 flex items-center justify-center group-hover:border-accent/30 transition-all duration-300">
+                <AppLogo src="/assets/images/Logo.png" size={32} className="rounded-xl" />
+              </div>
             </div>
             <div>
-              <div className="text-white font-semibold text-base">Prashant Heart Hospital</div>
-              <div className="text-accent/70 text-xs">The right care, is wherever you are.</div>
+              <div className="text-white font-serif text-lg leading-tight group-hover:text-accent transition-colors duration-300">
+                Prashant <span className="text-accent">Heart</span>
+              </div>
+              <div className="text-white/40 text-[10px] uppercase tracking-widest mt-1">Hospital</div>
             </div>
           </div>
 
